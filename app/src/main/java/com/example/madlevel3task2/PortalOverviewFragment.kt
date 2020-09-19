@@ -16,8 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_portal_overview.*
 
+private val portals = arrayListOf<Portal>()
+
 class PortalOverviewFragment : Fragment() {
-    private val portals = arrayListOf<Portal>()
     private val portalAdapter = PortalAdapter(portals)
 
     override fun onCreateView(
@@ -37,10 +38,9 @@ class PortalOverviewFragment : Fragment() {
 
     private fun initViews () {
         rvPortals.adapter = portalAdapter
-//        rvPortals.layoutManager = GridLayoutManager(
-//            context, 2
-//        )
-        rvPortals.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        rvPortals.layoutManager = GridLayoutManager(
+            context, 2
+        )
     }
 
     private fun observeAddPortal() {
@@ -53,5 +53,6 @@ class PortalOverviewFragment : Fragment() {
             portals.add(portal)
             portalAdapter.notifyDataSetChanged()
         }
+        Log.d(TAG, portals.size.toString())
     }
 }
