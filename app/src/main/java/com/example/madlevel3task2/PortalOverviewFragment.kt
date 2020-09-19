@@ -8,10 +8,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class PortalOverviewFragment : Fragment() {
+    private val portals = arrayListOf<Portal>()
+    private val portalAdapter = PortalAdapter(portals)
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -24,8 +23,13 @@ class PortalOverviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<Button>(R.id.button_first).setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-        }
+//        view.findViewById<Button>(R.id.button_first).setOnClickListener {
+//            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+//        }
+        initViews()
+    }
+
+    private fun initViews () {
+
     }
 }
