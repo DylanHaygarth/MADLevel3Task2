@@ -1,12 +1,20 @@
 package com.example.madlevel3task2
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.fragment_portal_overview.*
 
 class PortalOverviewFragment : Fragment() {
     private val portals = arrayListOf<Portal>()
@@ -23,13 +31,27 @@ class PortalOverviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        view.findViewById<Button>(R.id.button_first).setOnClickListener {
-//            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-//        }
         initViews()
+        observeAddPortal()
     }
 
     private fun initViews () {
+        rvPortals.adapter = portalAdapter
+//        rvPortals.layoutManager = GridLayoutManager(
+//            context, 2
+//        )
+        rvPortals.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+    }
 
+    private fun observeAddPortal() {
+        val portalName = arguments?.getString(ARG_PORTAL_TITLE)
+        val portalUrl = arguments?.getString(ARG_PORTAL_URL)
+
+        if (portalName != null && portalUrl != null) {
+            val portal = Portal(portalName, portalUrl)
+
+            portals.add(portal)
+            portalAdapter.notifyDataSetChanged()
+        }
     }
 }
