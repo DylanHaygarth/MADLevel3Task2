@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -19,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_portal_overview.*
 private val portals = arrayListOf<Portal>()
 
 class PortalOverviewFragment : Fragment() {
-    private val portalAdapter = PortalAdapter(portals)
+    private val portalAdapter = PortalAdapter(portals) {partItem: Portal -> partItemClicked(partItem)}
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +54,10 @@ class PortalOverviewFragment : Fragment() {
             portals.add(portal)
             portalAdapter.notifyDataSetChanged()
         }
-        Log.d(TAG, portals.size.toString())
+    }
+
+    // items within in the recycler view can be clicked using a click listener
+    private fun partItemClicked(partItem : Portal) {
+
     }
 }
