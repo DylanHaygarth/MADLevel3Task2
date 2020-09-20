@@ -1,6 +1,7 @@
 package com.example.madlevel3task2
 
 import android.content.ContentValues.TAG
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -58,6 +60,9 @@ class PortalOverviewFragment : Fragment() {
 
     // items within in the recycler view can be clicked using a click listener
     private fun partItemClicked(partItem : Portal) {
-
+        val builder = CustomTabsIntent.Builder()
+        val customTabsIntent = builder.build()
+        
+        customTabsIntent.launchUrl(this.requireContext(), Uri.parse(partItem.url))
     }
 }
